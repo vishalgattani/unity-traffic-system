@@ -5,7 +5,7 @@ public class AnimationStateController : MonoBehaviour
     private Animator animator;
     public Vector3 destination;
     private Vector3 previousPosition;
-    private bool reachDestination;
+    public bool reachDestination;
 
     [SerializeField] private float stopDistance = 0.1f;
     [SerializeField] private float rotationSpeed = 720f;
@@ -19,7 +19,7 @@ public class AnimationStateController : MonoBehaviour
         animator = GetComponent<Animator>();
         previousPosition = transform.position;
         reachDestination = false;
-        destination = transform.position; // Initialize destination
+        // destination = transform.position; // Initialize destination
     }
 
     void Update()
@@ -35,7 +35,7 @@ public class AnimationStateController : MonoBehaviour
             Vector3 destinationDirection = destination - transform.position;
             destinationDirection.y = 0;
             float distance = destinationDirection.magnitude;
-
+            
             if (distance > stopDistance)
             {
                 reachDestination = false;
@@ -58,25 +58,20 @@ public class AnimationStateController : MonoBehaviour
         previousPosition = transform.position;
         movement.y = 0;
 
-        if (movement.magnitude > 0.01f)
-        {
-            Vector3 normalizedMovement = movement.normalized;
-            float forwardMovement = Vector3.Dot(normalizedMovement, transform.forward);
-            float rightMovement = Vector3.Dot(normalizedMovement, transform.right);
+        var velocityMagnitude = movement.magnitude;
 
-            animator.SetFloat(ForwardParam, forwardMovement);
-            animator.SetFloat(HorizontalParam, rightMovement);
-        }
-        else
-        {
-            animator.SetFloat(ForwardParam, 0);
-            animator.SetFloat(HorizontalParam, 0);
-        }
+        Vector3 normalizedMovement = movement.normalized;
+        float forwardMovement = Vector3.Dot(normalizedMovement, transform.forward);
+        float rightMovement = Vector3.Dot(normalizedMovement, transform.right);
+
+        animator.SetFloat(ForwardParam, forwardMovement);
+        animator.SetFloat(HorizontalParam, rightMovement);
 
         if (reachDestination)
         {
-            // You can add any specific behavior here when destination is reached
-            reachDestination = false;
+            animator.SetFloat(ForwardParam, 0);
+            animator.SetFloat(HorizontalParam, 0);
+            // reachDestination = false;
         }
     }
 
