@@ -29,5 +29,13 @@ public class WaypointEditor
             Vector3 offsetto = (waypoint.nextWaypoint.transform.right * -waypoint.nextWaypoint.width/2f);
             Gizmos.DrawLine(waypoint.transform.position + offset, waypoint.nextWaypoint.transform.position + offsetto);
         }
+        if (waypoint.branches != null){
+            foreach(Waypoint branch in waypoint.branches){
+                Gizmos.color = Color.blue;
+                // Vector3 offset = (waypoint.transform.right * waypoint.width/2f);
+                // Vector3 offsetto = (branch.transform.right * branch.width/2f);
+                Gizmos.DrawLine(waypoint.transform.position, branch.transform.position);
+            }
+        }
     }
 }
