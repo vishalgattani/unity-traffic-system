@@ -14,11 +14,24 @@ There are different ways of transitioning between animation states using the ani
 
 ### Animator with Blend Trees
 
-Yet to be added
+To dynamically blend multiple animations together, we can use the blend tree feature of the animator. This results in a dynamic animation that scales between the multiple animation states. The blneding can depend on multiple float values. For example, we can have a blend tree that transitions between two animation states based on the value of the `Velocity` parameter. If the velocity is low, the animation will transition to the walking animation state. If the velocity is high, the animation will transition to the running animation state. And if the velocity is less than a certain small value, the animation will transition to the idle animation state. You can have blend trees within blend trees to create even more complex animation transitions.
 
-## How to Use
 
-Yet to be added
+## Steps
+
+- Create an animator controller
+- Create a character controller
+- Create a waypoint manager
+- Create waypoints
+- Create pedestrians
+- Assign the start waypoint in a randomized fashion to randomized number of pedestrians. 
+- Assign a randomized direction to the pedestrians
+- Assign a randomized speed to the pedestrians
+- Assign a randomized destination to the pedestrians
+- Assign a randomized rotation speed to the pedestrians
+- Assign a randomized movement speed to the pedestrians
+- Assign a randomized stop distance to the pedestrians
+- Assign a randomized branch ratio to the waypoints
 
 ## Contributing
 
