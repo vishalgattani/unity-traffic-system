@@ -8,14 +8,16 @@ public class AnimationStateController : MonoBehaviour
     public bool reachDestination;
 
     [SerializeField] private float stopDistance = 0.1f;
-    [SerializeField] private float rotationSpeed = 720f;
+    [SerializeField] private float rotationSpeed = 360f;
     [SerializeField] private float movementSpeed = 2.0f;
+    [SerializeField] private float collisionRotationAngle = 10f; // Angle to rotate on collision
 
     private static readonly int ForwardParam = Animator.StringToHash("Forward");
     private static readonly int HorizontalParam = Animator.StringToHash("Horizontal");
-
+    private Rigidbody rb;
     void Awake(){  
         movementSpeed = Random.Range(1.75f, 2.25f);
+        rb = GetComponent<Rigidbody>();
     }
 
     void Start()
@@ -53,6 +55,17 @@ public class AnimationStateController : MonoBehaviour
             {
                 reachDestination = true;
             }
+        }
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag(gameObject.tag)) // Check if colliding with same kind of object
+        {
+            float rotationDirection = Random.value < 0.5f ? -1f : 1f;
+            //rotate around y axis
+            transform.Rotate(0, collisionRotationAngle * rotationDirection, 0);
+            // destination += transform.forward * 0.5f; // i if needed move destination slightly forward
         }
     }
 
