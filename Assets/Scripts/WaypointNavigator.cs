@@ -7,12 +7,14 @@ public class WaypointNavigator : MonoBehaviour
     // Start is called before the first frame update
     AnimationStateController controller;
     public Waypoint currentWaypoint;
+    public int direction;
 
     private void Awake(){
         controller = GetComponent<AnimationStateController>();
     }
     void Start()
     {
+        direction = Mathf.RoundToInt(Random.Range(0f, 1f));
         controller.SetDestination(currentWaypoint.GetPosition());
     }
 
@@ -21,7 +23,12 @@ public class WaypointNavigator : MonoBehaviour
     {
         if (controller.reachDestination){
             if (currentWaypoint.nextWaypoint != null){
-                currentWaypoint = currentWaypoint.nextWaypoint;
+                if (direction == 0){
+                    currentWaypoint = currentWaypoint.nextWaypoint;
+                }
+                else{
+                    currentWaypoint = currentWaypoint.previousWaypoint;
+                }
                 controller.SetDestination(currentWaypoint.GetPosition());
             }
         }

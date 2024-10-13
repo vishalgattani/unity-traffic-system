@@ -9,10 +9,14 @@ public class AnimationStateController : MonoBehaviour
 
     [SerializeField] private float stopDistance = 0.1f;
     [SerializeField] private float rotationSpeed = 720f;
-    [SerializeField] private float movementSpeed = 2f;
+    [SerializeField] private float movementSpeed = 2.0f;
 
     private static readonly int ForwardParam = Animator.StringToHash("Forward");
     private static readonly int HorizontalParam = Animator.StringToHash("Horizontal");
+
+    void Awake(){  
+        movementSpeed = Random.Range(1.75f, 2.25f);
+    }
 
     void Start()
     {
