@@ -5,7 +5,7 @@ using UnityEngine;
 public class WaypointNavigator : MonoBehaviour
 {
     // Start is called before the first frame update
-    AnimationStateController controller;
+    public AnimationStateController controller;
     public Waypoint currentWaypoint;
     public int direction;
 
